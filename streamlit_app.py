@@ -11,7 +11,7 @@ if __name__ == '__main__':
     
     # just copy paste updated euqation file 
     if st.checkbox('Click me'):
-        st.write('Ma Chuda')
+        st.write('Badiya_badiya')
 
 
 
