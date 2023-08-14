@@ -5,6 +5,7 @@ import altair as alt
 import re
 import pandas as pd
 import numpy as np
+from io import StringIO
 
 
 
@@ -28,7 +29,7 @@ def read_from_file(file_name): # read the file and gives dictionary
     
     
 def download_file():
-    with open("my_file.txt", "rb") as f:
+    with open("data_dict.txt", "rb") as f:
         data = f.read()
     return st.download_button(
         label="Download File",
@@ -66,42 +67,27 @@ if st.text_input('enter the code') == pass_code:
         st.write(dict(reversed(list(data_dict.items())))) # show the dictionary in reverse order
     
     
-    
-    filename = "my_file.txt"
-    content = str({
-  "Rules": "Never be low on energy. Avoid long walks in the sun. Your face will loose luster, you will not have energy to appreciate if you encounter something beautiful. ",
-  "Automation": "-- Laser solder ball generator\n-- TIW laser cutter workshop",
-  "organize": "Salvage components \n- take a backup of this hello-app every night before sleep. \n- make a server to backup files from your apps on your previous laptop and replace it with resberry pi.\n- Learn to access google drive API in python.",
-  "simulation": "- if you want to learn or explore or play with something new, break it apart and play with it in template, record your learning and then include it in you original file.\n-simulation : always keep a basic template, keep adding the new commands to the template, keep a readme text file with template (later on you can change it to markdown and access it by streamlit), add the commands and things you learned to the readme,\n- simulation : write a code to attach all or one screenshot in the download to notability pdf file, make a template and attach figures by python, save it to dropbox."
-})
-    
-    
-    write_file(filename, content)
-    
-    
-    
-    
-    
-    
-    
 
-    st.title("Streamlit Download Button")
+
+    
+    
+    
+    
+    
     download_file()
+
+    uploaded_file = st.file_uploader("Upload File")
+    if uploaded_file is not None:
+    # To convert to a string based IO:
+        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        # To read file as string:
+        string_data = stringio.read()
+        st.write(string_data)
+        write_to_file(file_name, string_data)
+        
+        
+
     
 
 
