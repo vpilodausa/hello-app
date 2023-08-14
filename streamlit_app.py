@@ -67,26 +67,36 @@ if st.text_input('enter the code') == pass_code:
         st.write(dict(reversed(list(data_dict.items())))) # show the dictionary in reverse order
     
     
+    
+    
+    # vertical space
+    st.text("\n\n\n\n")
 
 
+    if st.button("backup"):
+        col1, col2 = st.columns(2)
+        with col1:
+            download_file()
+        with col2:
+            uploaded_file = st.file_uploader("Upload File")
+            if uploaded_file is not None:
+            # To convert to a string based IO:
+                stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+            
+                # To read file as string:
+                string_data = stringio.read()
+                st.write(string_data)
+                write_to_file(file_name, string_data)
+                
+            
     
-    
-    
-    
-    
-    download_file()
 
-    uploaded_file = st.file_uploader("Upload File")
-    if uploaded_file is not None:
-    # To convert to a string based IO:
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    
-        # To read file as string:
-        string_data = stringio.read()
-        st.write(string_data)
-        write_to_file(file_name, string_data)
         
-        
+    
+    
+    
+
+
 
     
 
